@@ -13,13 +13,14 @@ from PIL import Image
 
 class Dataset(data.Dataset):
 
-	def __init__(self, root, img_paths, img_labels, transform=None):
+	def __init__(self, root, img_paths, img_labels, transform=None, get_aux=False, aux=None):
 		"""Load image paths and labels from gt_file"""
 		self.root = root
 		self.transform = transform
-
+		self.get_aux = get_aux
 		self.img_paths = img_paths
 		self.img_labels = img_labels
+		self.aux = aux
 
 	def __getitem__(self, idx):
 		"""Load image.
@@ -38,11 +39,13 @@ class Dataset(data.Dataset):
 		if self.transform:
 			img = self.transform(img)
 
-		return img, label
+		if self.get_aux:
+			return img, label,
+
+		return img, label, self.aux[idx]
 
 	def __len__(self):
 		return len(self.img_paths)
-
 
 
 def get_triple_meta_data(file_path):
@@ -113,3 +116,4 @@ def sample_data(df, df_four):
 
 	df = pd.concat([df_neg, df_pos, df_sur])
 	return df
+

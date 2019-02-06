@@ -4,12 +4,12 @@ import torch
 
 from torch.optim import Adam, SGD, lr_scheduler
 
-from capsule.data import load_mnist, load_me, data_split, sample_data
-from capsule.modules import MNISTCapsuleNet, MECapsuleNet
+from capsule.data import load_me, data_split, sample_data
 from capsule.loss import me_loss
 
 from torchvision import transforms
 from capsule.data import get_meta_data, Dataset
+from capsule.evaluations import Meter
 
 from tqdm import tqdm
 import pandas as pd
@@ -17,39 +17,12 @@ import numpy as np
 from sklearn.metrics import recall_score, f1_score
 from sklearn.utils import shuffle
 import pickle
-
-
-class Meter(object):
-	def __init__(self):
-		self.Y_true = np.array([], dtype=np.int)
-		self.Y_pred = np.array([], dtype=np.int)
-
-
-	def add(self, y_true, y_pred, verbose=False):
-		if len(self.Y_true.shape) != len(y_true.shape):
-			print('shape self.Y_true', self.Y_true.shape)
-			print('y_true', y_true.shape)
-
-		self.Y_true = np.concatenate((self.Y_true, y_true))
-		self.Y_pred = np.concatenate((self.Y_pred, y_pred))
-
-	def reset(self):
-		self.Y_true = np.array([], dtype=np.int)
-		self.Y_pred = np.array([], dtype=np.int)
-
-	def value(self):
-		eye = np.eye(3, dtype=np.int)
-		Y_true = eye[self.Y_true]
-		Y_pred = eye[self.Y_pred]
-		uar = recall_score(Y_true, Y_pred, average=None)
-		uf1 = f1_score(Y_true, Y_pred, average=None)
-		return uar, uf1
-
-
 import torch.nn as nn
 from torchvision import models
 import torch.nn.functional as F
 from torch.nn import CrossEntropyLoss
+
+
 
 criterion = CrossEntropyLoss()
 
@@ -210,7 +183,6 @@ def on_epoch(model, optimizer, lr_decay, train_loader, test_loader, epoch):
 	test_loss /= float(len(test_loader.dataset))
 	test_acc = float(correct.item()) / float(len(test_loader.dataset))
 	return train_loss, train_acc, test_loss, test_acc, meter
-
 
 
 def train_eval(subject_out_idx):

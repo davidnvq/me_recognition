@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from .capsule_layers import PrimaryCapsule, DenseCapsule
+from .capsule_layers import PrimaryCapsule, MECapsule
 from .activations import squash
 from torchvision import models
 
@@ -66,18 +66,15 @@ class MECapsuleNet(nn.Module):
 
 		self.conv = backbone[conv_name](is_freeze)
 
-		# Layer 1: Just a conventional Conv2D layer
 		self.conv1 = nn.Conv2d(256, 256, kernel_size=9, stride=1, padding=0)
 
-		# Layer 2: Conv2D layer with `squash` activation, then reshape to [None, num_caps, dim_caps]
 		self.primarycaps = PrimaryCapsule(256, 32 * 8, 8, kernel_size=9, stride=2, padding=0)
 
-		# Layer 3: Capsule layer. Routing algorithm works here.
-		self.digitcaps = DenseCapsule(in_num_caps=32 * 6 * 6,
-		                              in_dim_caps=8,
-		                              out_num_caps=self.classes,
-		                              out_dim_caps=16,
-		                              routings=routings)
+		self.digitcaps = MECapsule(in_num_caps=32 * 6 * 6,
+		                           in_dim_caps=8,
+		                           out_num_caps=self.classes,
+		                           out_dim_caps=16,
+		                           routings=routings)
 
 		self.relu = nn.ReLU()
 

@@ -1,44 +1,28 @@
 import pickle
+from capsule.evaluations import Meter
+import pandas as pd
 
-def load_me_data(data_root, file_path, subject_out_idx, batch_size=32, num_workers=4):
-	df_train, df_val = data_split(file_path, subject_out_idx)
-	df_four = pd.read_csv(data_four_frames_path)
-	df_train_sampled = sample_data(df_train, df_four)
-	df_train_sampled = shuffle(df_train_sampled)
+with open('outputs/scores_capsule_resnet_sampled_freeze.pkl', 'rb') as f:
+	data = pickle.load(f)
 
-	train_paths, train_labels = get_meta_data(df_train_sampled)
+scores = data['meter'].value()
+print(scores[0])
+print(scores[1])
 
-	train_transforms = transforms.Compose([transforms.Resize((234, 240)),
-	                                       transforms.RandomRotation(degrees=(-8, 8)),
-	                                       transforms.RandomHorizontalFlip(),
-	                                       transforms.ColorJitter(brightness=0.2, contrast=0.2,
-	                                                              saturation=0.2, hue=0.2),
-	                                       transforms.RandomCrop((224, 224)),
-	                                       transforms.ToTensor()])
+Y_pred = data['meter'].Y_pred
+Y_true = data['meter'].Y_true
 
-	train_dataset = Dataset(root=data_root,
-	                        img_paths=train_paths,
-	                        img_labels=train_labels,
-	                        transform=train_transforms)
+me = pd.read_csv('datasets/data_apex.csv')
+data = 'smic'
+subject = '20'
+print(data, subject)
 
-	val_transforms = transforms.Compose([transforms.Resize((234, 240)),
-	                                     transforms.RandomRotation(degrees=(-8, 8)),
-	                                     transforms.CenterCrop((224, 224)),
-	                                     transforms.ToTensor()])
+for i in range(len(Y_true)):
+	y_true = Y_true[i]
 
-	val_paths, val_labels = get_meta_data(df_val)
-	val_dataset = Dataset(root=data_root,
-	                      img_paths=val_paths,
-	                      img_labels=val_labels,
-	                      transform=val_transforms)
+	if data != me.iloc[i]['data'] or subject != me.iloc[i]['subject']:
+		print(me.iloc[i]['data'], me.iloc[i]['subject'])
+		data = me.iloc[i]['data']
+		subject = me.iloc[i]['subject']
 
-	train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-	                                           batch_size=batch_size,
-	                                           num_workers=num_workers,
-	                                           shuffle=True)
-
-	val_loader = torch.utils.data.DataLoader(dataset=val_dataset,
-	                                         batch_size=batch_size,
-	                                         num_workers=num_workers,
-	                                         shuffle=False)
-	return train_loader, val_loader
+	print(me.iloc[i]['clip'], Y_true[i], Y_pred[i])

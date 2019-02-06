@@ -1,24 +1,42 @@
 import torch
-from torchvision import datasets
+import pandas as pd
+from sklearn.utils import shuffle
 from torchvision import transforms
-from .dataset import Dataset, get_meta_data
+from .dataset import data_split, sample_data, get_meta_data, Dataset
+
+data_apex_frame_path = 'datasets/data_apex.csv'
+data_four_frames_path = 'datasets/data_four_frames.csv'
+data_root = '/home/ubuntu/Datasets/MEGC/process/'
 
 
-def load_me(data_root, train_file, val_file, batch_size=32, num_workers=4):
-	train_paths, train_labels = get_meta_data(train_file)
-	train_transforms = transforms.Compose([transforms.Resize(234, 240),
+def load_me_data(data_root, file_path, subject_out_idx, batch_size=32, num_workers=4):
+	df_train, df_val = data_split(file_path, subject_out_idx)
+	df_four = pd.read_csv(data_four_frames_path)
+	df_train_sampled = sample_data(df_train, df_four)
+	df_train_sampled = shuffle(df_train_sampled)
+
+	train_paths, train_labels = get_meta_data(df_train_sampled)
+
+	train_transforms = transforms.Compose([transforms.Resize((234, 240)),
 	                                       transforms.RandomRotation(degrees=(-8, 8)),
-	                                       transforms.RandomCrop(224, 224),
+	                                       transforms.RandomHorizontalFlip(),
+	                                       transforms.ColorJitter(brightness=0.2, contrast=0.2,
+	                                                              saturation=0.2, hue=0.2),
+	                                       transforms.RandomCrop((224, 224)),
 	                                       transforms.ToTensor()])
+
 	train_dataset = Dataset(root=data_root,
 	                        img_paths=train_paths,
 	                        img_labels=train_labels,
 	                        transform=train_transforms)
 
-	val_paths, val_labels = get_meta_data(val_file)
-	val_transforms = transforms.Compose([transforms.Resize(234, 240),
-	                                     transforms.CenterCrop(224, 224),
+	val_transforms = transforms.Compose([transforms.Resize((234, 240)),
+	                                     transforms.RandomRotation(degrees=(-8, 8)),
+	                                     transforms.CenterCrop((224, 224)),
 	                                     transforms.ToTensor()])
+
+	val_paths, val_labels = get_meta_data(df_val)
+
 	val_dataset = Dataset(root=data_root,
 	                      img_paths=val_paths,
 	                      img_labels=val_labels,
@@ -32,5 +50,5 @@ def load_me(data_root, train_file, val_file, batch_size=32, num_workers=4):
 	val_loader = torch.utils.data.DataLoader(dataset=val_dataset,
 	                                         batch_size=batch_size,
 	                                         num_workers=num_workers,
-	                                         shuffle=True)
+	                                         shuffle=False)
 	return train_loader, val_loader

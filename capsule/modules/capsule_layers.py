@@ -26,7 +26,7 @@ class PrimaryCapsule(nn.Module):
 
 
 
-class DenseCapsule(nn.Module):
+class MECapsule(nn.Module):
     """
     The dense capsule layer. It is similar to Dense (FC) layer. Dense layer has `in_num` inputs, each is a scalar, the
     output of the neuron from the former layer, and it has `out_num` output neurons. DenseCapsule just expands the
@@ -39,7 +39,7 @@ class DenseCapsule(nn.Module):
     :param routings: number of iterations for the routing algorithm
     """
     def __init__(self, in_num_caps, in_dim_caps, out_num_caps, out_dim_caps, routings=3):
-        super(DenseCapsule, self).__init__()
+        super(MECapsule, self).__init__()
         self.in_num_caps = in_num_caps
         self.in_dim_caps = in_dim_caps
         self.out_num_caps = out_num_caps

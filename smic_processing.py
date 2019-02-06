@@ -25,7 +25,6 @@ def get_clip_frame_paths(subject, filename, on_frame_idx, off_frame_idx):
 			print('Fail to locate file', frame_path)
 			raise Exception('The value of path was: {}'.format(frame_path))
 		frame_paths.append(frame_path)
-	# print('length frame_paths', len(frame_paths))
 	return frame_paths
 
 
