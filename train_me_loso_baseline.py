@@ -26,7 +26,7 @@ from torch.nn import CrossEntropyLoss
 
 criterion = CrossEntropyLoss()
 
-
+# VGG Baseline
 class VGG(nn.Module):
 	def __init__(self):
 		super(VGG, self).__init__()
@@ -37,7 +37,7 @@ class VGG(nn.Module):
 		output = F.softmax(self.model(x), dim=-1)
 		return output
 
-
+# ResNet Baseline
 class ResNet(nn.Module):
 	def __init__(self):
 		super(ResNet, self).__init__()

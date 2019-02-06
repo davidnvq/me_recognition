@@ -28,10 +28,9 @@ class PrimaryCapsule(nn.Module):
 
 class MECapsule(nn.Module):
     """
-    The dense capsule layer. It is similar to Dense (FC) layer. Dense layer has `in_num` inputs, each is a scalar, the
-    output of the neuron from the former layer, and it has `out_num` output neurons. DenseCapsule just expands the
-    output of the neuron from scalar to vector. So its input size = [None, in_num_caps, in_dim_caps] and output size = \
-    [None, out_num_caps, out_dim_caps]. For Dense Layer, in_dim_caps = out_dim_caps = 1.
+    The ME capsule layer. Dense layer has `in_num` inputs, each is a scalar, the
+    output of the neuron from the former layer, and it has `out_num` output neurons.
+    MECapsule just expands the output of the neuron from scalar to vector.
     :param in_num_caps: number of cpasules inputted to this layer
     :param in_dim_caps: dimension of input capsules
     :param out_num_caps: number of capsules outputted from this layer
@@ -48,40 +47,18 @@ class MECapsule(nn.Module):
         self.weight = nn.Parameter(0.01 * torch.randn(out_num_caps, in_num_caps, out_dim_caps, in_dim_caps))
 
     def forward(self, x):
-        # x.size=[batch, in_num_caps, in_dim_caps]
-        # expanded to    [batch, 1,            in_num_caps, in_dim_caps,  1]
-        # weight.size   =[       out_num_caps, in_num_caps, out_dim_caps, in_dim_caps]
-        # torch.matmul: [out_dim_caps, in_dim_caps] x [in_dim_caps, 1] -> [out_dim_caps, 1]
-        # => x_hat.size =[batch, out_num_caps, in_num_caps, out_dim_caps]
         x_hat = torch.squeeze(torch.matmul(self.weight, x[:, None, :, :, None]), dim=-1)
-
-        # In forward pass, `x_hat_detached` = `x_hat`;
-        # In backward, no gradient can flow from `x_hat_detached` back to `x_hat`.
         x_hat_detached = x_hat.detach()
 
-        # The prior for coupling coefficient, initialized as zeros.
-        # b.size = [batch, out_num_caps, in_num_caps]
         b = torch.zeros(x.size(0), self.out_num_caps, self.in_num_caps).cuda()
 
-        assert self.routings > 0, 'The \'routings\' should be > 0.'
         for i in range(self.routings):
-            # c.size = [batch, out_num_caps, in_num_caps]
             c = F.softmax(b, dim=1)
 
-            # At last iteration, use `x_hat` to compute `outputs` in order to backpropagate gradient
             if i == self.routings - 1:
-                # c.size expanded to [batch, out_num_caps, in_num_caps, 1           ]
-                # x_hat.size     =   [batch, out_num_caps, in_num_caps, out_dim_caps]
-                # => outputs.size=   [batch, out_num_caps, 1,           out_dim_caps]
                 outputs = squash(torch.sum(c[:, :, :, None] * x_hat, dim=-2, keepdim=True))
-                # outputs = squash(torch.matmul(c[:, :, None, :], x_hat))  # alternative way
-            else:  # Otherwise, use `x_hat_detached` to update `b`. No gradients flow on this path.
+            else:
                 outputs = squash(torch.sum(c[:, :, :, None] * x_hat_detached, dim=-2, keepdim=True))
-                # outputs = squash(torch.matmul(c[:, :, None, :], x_hat_detached))  # alternative way
-
-                # outputs.size       =[batch, out_num_caps, 1,           out_dim_caps]
-                # x_hat_detached.size=[batch, out_num_caps, in_num_caps, out_dim_caps]
-                # => b.size          =[batch, out_num_caps, in_num_caps]
                 b = b + torch.sum(outputs * x_hat_detached, dim=-1)
 
         return torch.squeeze(outputs, dim=-2)

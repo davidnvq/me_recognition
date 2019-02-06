@@ -4,7 +4,11 @@ import torch.nn as nn
 from sklearn.metrics import recall_score, f1_score
 
 class Meter(object):
+
 	def __init__(self):
+		"""
+		To record the measure the performance.
+		"""
 		self.Y_true = np.array([], dtype=np.int)
 		self.Y_pred = np.array([], dtype=np.int)
 

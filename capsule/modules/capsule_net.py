@@ -6,9 +6,9 @@ from .activations import squash
 from torchvision import models
 
 
-class ResNet(nn.Module):
+class ResNetLayers(nn.Module):
 	def __init__(self, is_freeze=False):
-		super(ResNet, self).__init__()
+		super(ResNetLayers, self).__init__()
 		self.model = models.resnet18(pretrained=True)
 		delattr(self.model, 'layer4')
 		delattr(self.model, 'avgpool')
@@ -30,9 +30,9 @@ class ResNet(nn.Module):
 		return output
 
 
-class VGG(nn.Module):
+class VGGLayers(nn.Module):
 	def __init__(self, is_freeze=True):
-		super(VGG, self).__init__()
+		super(VGGLayers, self).__init__()
 		self.model = models.vgg11(pretrained=True).features[:11]
 
 		if is_freeze:
@@ -42,9 +42,10 @@ class VGG(nn.Module):
 
 	def forward(self, x):
 		# x = [B, 3, 224, 224]
-		return self.model(x) # [B, 256, 20, 20]
+		return self.model(x)  # [B, 256, 20, 20]
 
-backbone = {'vgg' : VGG, 'resnet' : ResNet}
+
+backbone = {'vgg': VGGLayers, 'resnet': ResNetLayers}
 
 
 class MECapsuleNet(nn.Module):
