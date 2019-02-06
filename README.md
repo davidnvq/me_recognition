@@ -35,15 +35,14 @@ samm/32/032_3_1
 * Python 3
 * PyTorch
 * TorchVision
-* TorchNet
 * TQDM
-* Visdom
 
 ## Usage
 Run the following script to reproduce the result in the log file.
 
 ```bash
 python train_me_loso.py
+python get_result_log.py
 ```
 
 ## Project Structure

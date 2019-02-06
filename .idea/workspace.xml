@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1836b62-7f86-44a1-a71a-ba560d07c7d2" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/get_result_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capsule/evaluations/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/capsule/evaluations/eval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capsule/loss/losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/capsule/loss/losses.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capsule/modules/activations.py" beforeDir="false" afterPath="$PROJECT_DIR$/capsule/modules/activations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capsule/modules/capsule_layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/capsule/modules/capsule_layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capsule/modules/capsule_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/capsule/modules/capsule_net.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/get_result_log.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_me_loso_baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_me_loso_baseline.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +13,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="train_me_loso_baseline.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="train_me_loso_baseline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train_me_loso_baseline.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="290">
@@ -30,6 +21,15 @@
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="result_log.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/result_log.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -91,18 +91,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_result_log.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/get_result_log.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10">
-              <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="activations.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/capsule/modules/activations.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -112,12 +100,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="468">
-                <caret line="53" column="69" selection-start-line="53" selection-start-column="69" selection-end-line="53" selection-end-column="69" />
+              <first_editor relative-caret-position="120">
+                <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               </first_editor>
               <second_editor />
             </state>
@@ -206,13 +194,13 @@
         <option value="$PROJECT_DIR$/result_log.csv" />
         <option value="$PROJECT_DIR$/github_url.txt" />
         <option value="$PROJECT_DIR$/outputs/get_result_log.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/capsule/modules/capsule_layers.py" />
         <option value="$PROJECT_DIR$/capsule/modules/activations.py" />
         <option value="$PROJECT_DIR$/capsule/modules/capsule_net.py" />
         <option value="$PROJECT_DIR$/capsule/loss/losses.py" />
         <option value="$PROJECT_DIR$/capsule/evaluations/eval.py" />
         <option value="$PROJECT_DIR$/train_me_loso_baseline.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -241,17 +229,6 @@
             <path>
               <item name="micro-expression" type="b2602c69:ProjectViewProjectNode" />
               <item name="micro-expression" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="micro-expression" type="b2602c69:ProjectViewProjectNode" />
-              <item name="micro-expression" type="462c0819:PsiDirectoryNode" />
-              <item name="capsule" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="micro-expression" type="b2602c69:ProjectViewProjectNode" />
-              <item name="micro-expression" type="462c0819:PsiDirectoryNode" />
-              <item name="capsule" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -316,7 +293,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4983845" visible="true" weight="0.2" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4983845" visible="true" weight="0.47172415" />
       <window_info anchor="right" id="Remote Host" order="3" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27221325" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -512,13 +489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/result_log.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/github_url.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -538,16 +508,6 @@
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="468">
-            <caret line="53" column="69" selection-start-line="53" selection-start-column="69" selection-end-line="53" selection-end-column="69" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -646,6 +606,23 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/result_log.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="120">
+            <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
