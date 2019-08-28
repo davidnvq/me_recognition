@@ -3,8 +3,6 @@
 ## Description
 > This is the source code for the project joining the second Facial
 Micro-Expression Grand Challenge for Micro-expression Recognition Task.
-The challenge is organized in MEGC Workshop in conjunction with FG 2019.
-For more information and details, please visit the workshop [website](https://facial-micro-expressiongc.github.io/MEGC2019).
 
 
 ## The log file result
