@@ -39,8 +39,8 @@ class Dataset(data.Dataset):
 		if self.transform:
 			img = self.transform(img)
 
-		if self.get_aux:
-			return img, label,
+		if not self.get_aux:
+			return img, label
 
 		return img, label, self.aux[idx]
 
