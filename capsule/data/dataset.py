@@ -41,8 +41,8 @@ class Dataset(data.Dataset):
 
 		if not self.get_aux:
 			return img, label
-
-		return img, label, self.aux[idx]
+		else:
+			return img, label, self.aux[idx]
 
 	def __len__(self):
 		return len(self.img_paths)
