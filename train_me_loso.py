@@ -151,7 +151,7 @@ def train_eval(subject_out_idx):
 	# Model & others
 	model = MECapsuleNet(input_size=(3, 224, 224), classes=num_classes, routings=3, is_freeze=False)
 	model.cuda()
-	model.load_state_dict(torch.load(fer_weight_path)['model'])
+	# model.load_state_dict(torch.load(fer_weight_path)['model'])
 	optimizer = Adam(model.parameters(), lr=lr)
 	lr_decay = lr_scheduler.ExponentialLR(optimizer, gamma=lr_decay_value)
 
