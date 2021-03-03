@@ -1,7 +1,7 @@
 # CapsuleNet for Micro-expression Recognition
 
-# This repository was forked from the repository of the paper authors
-## However, I trained the model and saved it, along with model weights (state) and scores files in "trained" folder
+### This repository was forked from the repository of the paper authors
+However, I trained the model and saved it, along with model weights (state) and scores files in "trained" folder
 
 ## Description
 > This is the source code for the paper **CapsuleNet for Micro-expression Recognition** joining the second Facial
@@ -61,7 +61,8 @@ samm/32/032_3_1
 
 ## Usage
 
-### You might need to adjust dataset paths in ```train_me_loso.py``` file to wherever your datasets are
+**You might need to adjust dataset paths in ```train_me_loso.py``` file to wherever your datasets are**
+
 Run the following script to reproduce the result in the log file.
 
 ```bash
