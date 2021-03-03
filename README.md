@@ -55,7 +55,7 @@ samm/32/032_3_1
 
 ## Requirements
 * Python 3
-* PyTorch
+* PyTorch (GPU)
 * TorchVision
 * TQDM
 
