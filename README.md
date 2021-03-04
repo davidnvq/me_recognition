@@ -57,7 +57,6 @@ samm/32/032_3_1
 * TQDM
 
 ## Usage
-
 Run the following script to reproduce the result in the log file.
 
 ```bash
