@@ -29,6 +29,9 @@ N. V. Quang, J. Chun and T. Tokuyama, "CapsuleNet for Micro-Expression Recogniti
 ## The log file result
 > `result_log.csv`.
 
+## The reproduced log file result
+> `result_log_reproduced.csv`.
+
 ## Some missing and invalid clips 
 
 There are 7 clip file which are missing or invalid. 
