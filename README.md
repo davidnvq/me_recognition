@@ -28,13 +28,13 @@ N. V. Quang, J. Chun and T. Tokuyama, "CapsuleNet for Micro-Expression Recogniti
 
 ## The log file result
 > `result_log.csv`.
-
-## The reproduced log file result
+```
+# the reproduced log file result
 > `result_log_reproduced.csv`.
+```
+### Some missing and invalid clips 
 
-## Some missing and invalid clips 
-
-There are 7 clip file which are missing or invalid. 
+There are 7 clip files which are missing or invalid. 
 
 * The below clips don't exist in the downloaded datasets
 ```
@@ -45,7 +45,7 @@ smic/HS_long/SMIC_HS_E/s04/s4_ne_06 not exists
 smic/HS_long/SMIC_HS_E/s09/s9_sur_02 not exists
 ```
 
-* The invalid clips in which the apex frame out onset-offset duration
+* The invalid clips in which the apex frames are out of onset-offset duration
 
 ```
 samm/28/028_4_1
@@ -75,7 +75,3 @@ python get_result_log.py
 * `get_result_log.py`: Write the result log file from the pickle file.
 * `capsule`: The package for building CapsuleNet and Loss.
 
-## To-do list
-- [ ] Clean the code.
-- [ ] Upload the pre-trained models
-- [ ] Write better documentation.
